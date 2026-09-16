@@ -29,10 +29,10 @@ Quickpad is a Herdr plugin for temporary work. It opens a focused popup with two
 
 ## Install
 
-Link the local plugin into Herdr:
+Install the plugin from GitHub:
 
 ```bash
-herdr plugin link /Users/ryan/dev/herdr-quickpad
+herdr plugin install rhinoc/herdr-quickpad
 herdr plugin action list --plugin rhinoc.herdr-workbench
 ```
 
