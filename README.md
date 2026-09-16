@@ -5,6 +5,23 @@
   <br />
 </div>
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="./assets/readme/quickpad-notes.png" width="480" alt="Quickpad Notes tab" />
+      <br />
+      <sub>Notes tab with an auto-saving checklist</sub>
+    </td>
+    <td align="center">
+      <img src="./assets/readme/quickpad-terminal.png" width="480" alt="Quickpad Terminal tab" />
+      <br />
+      <sub>Terminal tab inside the same popup</sub>
+    </td>
+  </tr>
+</table>
+
 Quickpad is a Herdr plugin for temporary work. It opens a focused popup with two full-screen tabs:
 
 - **Notes** for short-lived Markdown or plain-text notes
