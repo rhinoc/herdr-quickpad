@@ -1,0 +1,22 @@
+id = "rhinoc.herdr-quickpad"
+name = "Quickpad"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "A persistent workspace notes panel with an embedded terminal."
+platforms = ["macos", "linux"]
+
+[[actions]]
+id = "toggle"
+title = "Toggle Quickpad"
+description = "Open or close the temporary notes and terminal workspace"
+contexts = ["global"]
+command = ["node", "index.js", "toggle"]
+
+[[panes]]
+id = "quickpad"
+title = "Quickpad"
+description = "Temporary notes and one-time terminal commands"
+placement = "popup"
+width = "60%"
+height = "55%"
+command = ["node", "index.js", "ui"]
