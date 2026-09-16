@@ -2,7 +2,7 @@ id = "rhinoc.herdr-workbench"
 name = "Quickpad"
 version = "0.1.0"
 min_herdr_version = "0.9.0"
-description = "A persistent workspace notes panel with an embedded terminal."
+description = "Temporary Herdr workspace for quick Markdown notes, checklists, and one-time shell commands in an embedded terminal."
 platforms = ["macos", "linux"]
 
 [[actions]]

@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <h1>Quickpad</h1>
-  <p>A small Herdr workspace for writing notes and running one-time shell commands.</p>
+  <p>A temporary Herdr workspace for quick notes, checklists, and one-time shell commands.</p>
   <br />
 </div>
 
