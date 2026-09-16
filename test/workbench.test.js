@@ -43,7 +43,7 @@ test("decodes REPORT_ALL_KEYS text, controls, and navigation", () => {
   assert.deepEqual(csiEvent("\x1b[97;1:1;97u"), { type: "text", value: "a" });
   assert.deepEqual(csiEvent("\x1b[65:97;2:1;65u"), { type: "text", value: "A" });
   assert.deepEqual(csiEvent("\x1b[57419;1:1u"), { type: "up" });
-  assert.deepEqual(csiEvent("\x1b[116;5:1;116u"), { type: "terminal" });
+  assert.deepEqual(csiEvent("\x1b[116;5:1;116u"), { type: "switch-tab" });
   assert.deepEqual(csiEvent("\x1b[106;1:3u"), { type: "unknown" });
 });
 
@@ -82,11 +82,10 @@ test("keeps ordinary note text and control keys", () => {
   ]);
 });
 
-test("decodes ctrl+t as the temporary terminal command", () => {
+test("decodes ctrl+t as the tab switching command", () => {
   const decoder = new InputDecoder();
-  assert.deepEqual(decoder.feed(Buffer.from("\x14")), [{ type: "terminal" }]);
-  assert.deepEqual(decoder.feed(Buffer.from("\x0e")), [{ type: "notes" }]);
-  assert.deepEqual(csiEvent("\x1b[110;5:1u"), { type: "notes" });
+  assert.deepEqual(decoder.feed(Buffer.from("\x14")), [{ type: "switch-tab" }]);
+  assert.deepEqual(csiEvent("\x1b[110;5:1u"), { type: "unknown" });
 });
 
 test("supports Delete and tab switching", () => {
@@ -110,7 +109,7 @@ test("supports Delete and tab switching", () => {
     ui.handleNotes({ type: "delete" });
     assert.deepEqual(ui.noteLines, ["acd"]);
 
-    ui.handleTerminal({ type: "notes" });
+    ui.handleTerminal({ type: "switch-tab" });
     assert.equal(ui.activeTab, "notes");
     ui.handleMouse({ type: "mouse", action: "press", button: 0, column: 12, row: 0 });
     assert.equal(ui.activeTab, "terminal");
@@ -167,13 +166,15 @@ test("Ctrl+T opens one embedded home-directory shell", () => {
         return terminal;
       },
     });
-    ui.handleNotes({ type: "terminal" });
+    ui.handleNotes({ type: "switch-tab" });
     assert.equal(ui.activeTab, "terminal");
     assert.equal(ui.terminalCwd, os.homedir());
     assert.equal(created.length, 1);
     assert.equal(created[0].cwd, os.homedir());
-    ui.handleTerminal({ type: "notes" });
-    ui.handleNotes({ type: "terminal" });
+    ui.handleTerminal({ type: "switch-tab" });
+    assert.equal(ui.activeTab, "notes");
+    ui.handleNotes({ type: "switch-tab" });
+    assert.equal(ui.activeTab, "terminal");
     assert.equal(created.length, 1);
   } finally {
     if (previousStateDir === undefined) delete process.env.HERDR_PLUGIN_STATE_DIR;
@@ -181,7 +182,7 @@ test("Ctrl+T opens one embedded home-directory shell", () => {
   }
 });
 
-test("embedded terminal receives raw input and Ctrl+N returns to notes", () => {
+test("embedded terminal receives raw input and Ctrl+T returns to notes", () => {
   const stateDir = fs.mkdtempSync(path.join(os.tmpdir(), "herdr-quickpad-"));
   const previousStateDir = process.env.HERDR_PLUGIN_STATE_DIR;
   process.env.HERDR_PLUGIN_STATE_DIR = stateDir;
@@ -199,10 +200,10 @@ test("embedded terminal receives raw input and Ctrl+N returns to notes", () => {
       },
     };
     const ui = new WorkbenchUi({ terminalFactory: () => terminal });
-    ui.handleNotes({ type: "terminal" });
+    ui.handleNotes({ type: "switch-tab" });
     ui.handleInput(Buffer.from("echo hello\r"));
     assert.deepEqual(written, ["echo hello\r"]);
-    ui.handleInput(Buffer.from("\x0e"));
+    ui.handleInput(Buffer.from("\x14"));
     assert.equal(ui.activeTab, "notes");
   } finally {
     if (previousStateDir === undefined) delete process.env.HERDR_PLUGIN_STATE_DIR;
