@@ -2,11 +2,6 @@
   <br />
   <h1>Quickpad</h1>
   <p>A small Herdr workspace for writing notes and running one-time shell commands.</p>
-  <p>
-    <a href="https://github.com/rhinoc/herdr-quickpad">Repository</a>
-    &nbsp;·&nbsp;
-    <a href="https://github.com/rhinoc/herdr-quickpad/issues">Issues</a>
-  </p>
   <br />
 </div>
 
