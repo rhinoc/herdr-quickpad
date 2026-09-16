@@ -33,7 +33,7 @@ Link the local plugin into Herdr:
 
 ```bash
 herdr plugin link /Users/ryan/dev/herdr-quickpad
-herdr plugin action list --plugin rhinoc.herdr-quickpad
+herdr plugin action list --plugin rhinoc.herdr-workbench
 ```
 
 Add a global shortcut to `~/.config/herdr/config.toml`:
@@ -42,7 +42,7 @@ Add a global shortcut to `~/.config/herdr/config.toml`:
 [[keys.command]]
 key = "cmd+j"
 type = "plugin_action"
-command = "rhinoc.herdr-quickpad.toggle"
+command = "rhinoc.herdr-workbench.toggle"
 description = "toggle quickpad"
 ```
 
