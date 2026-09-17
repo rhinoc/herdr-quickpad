@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <h1>Quickpad</h1>
-  <p>A temporary Herdr workspace for quick notes, checklists, and one-time shell commands.</p>
+  <p>A temporary Herdr workspace for quick notes, checklists, and shell commands.</p>
   <br />
 </div>
 
@@ -25,7 +25,7 @@
 Quickpad is a Herdr plugin for temporary work. It opens a focused popup with two full-screen tabs:
 
 - **Notes** for short-lived Markdown or plain-text notes
-- **Terminal** for commands that are useful once and do not need a dedicated terminal window
+- **Terminal** for shell sessions, including long-running commands, without opening a separate terminal window
 
 ## Features
 
@@ -80,8 +80,9 @@ Open Quickpad with `cmd+j`.
 
 ### Terminal
 
-- The first switch starts one shell in the user home directory.
-- Switching back and forth reuses the same shell session.
+- The first switch starts a shell in the user home directory.
+- Switching back and forth while the popup is open reuses the same shell session.
+- Long-running commands keep running while you switch to Notes.
 - `Ctrl+T` switches back to Notes.
 - Shell input stays inside this popup; Quickpad does not open a separate Herdr tab.
 

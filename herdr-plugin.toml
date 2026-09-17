@@ -2,7 +2,7 @@ id = "rhinoc.herdr-workbench"
 name = "Quickpad"
 version = "0.1.0"
 min_herdr_version = "0.9.0"
-description = "Notes and one-time shell commands in a Herdr popup."
+description = "Notes and shell commands in a Herdr popup."
 platforms = ["macos", "linux"]
 
 [[build]]
@@ -18,7 +18,7 @@ command = ["node", "index.js", "toggle"]
 [[panes]]
 id = "workbench"
 title = "Quickpad"
-description = "Temporary notes and one-time terminal commands"
+description = "Notes and shell commands in a temporary popup"
 placement = "popup"
 width = "60%"
 height = "55%"

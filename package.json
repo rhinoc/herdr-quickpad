@@ -2,7 +2,7 @@
   "name": "herdr-quickpad",
   "version": "0.1.0",
   "private": true,
-  "description": "Herdr temporary notes and embedded terminal plugin",
+  "description": "Herdr notes and embedded terminal plugin",
   "type": "commonjs",
   "scripts": {
     "test": "node --test"
