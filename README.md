@@ -30,7 +30,7 @@ Quickpad is a Herdr plugin for temporary work. It opens a focused popup with two
 ## Features
 
 - 📝 **Auto-saving Markdown notes** — Edit, split, and delete lines without a separate save action, with inline rendering for headings, emphasis, lists, and task checkboxes.
-- 🖥️ **Embedded terminal** — Start a shell in the current popup, rooted at your home directory.
+- 🖥️ **Embedded terminal** — Start a shell in the current popup, rooted at your home directory; its session survives closing and reopening Quickpad.
 - 🔁 **Fast tab switching** — Click either tab or press `Ctrl+T` from either tab.
 - 🧹 **Temporary by design** — `cmd+j` toggles the popup and `Esc` closes it.
 
@@ -81,8 +81,8 @@ Open Quickpad with `cmd+j`.
 ### Terminal
 
 - The first switch starts a shell in the user home directory.
-- Switching back and forth while the popup is open reuses the same shell session.
-- Long-running commands keep running while you switch to Notes.
+- Switching back and forth reuses the same shell session.
+- Closing and reopening Quickpad reconnects to the same shell, so long-running commands keep running.
 - `Ctrl+T` switches back to Notes.
 - Shell input stays inside this popup; Quickpad does not open a separate Herdr tab.
 

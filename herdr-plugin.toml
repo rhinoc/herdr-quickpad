@@ -8,6 +8,9 @@ platforms = ["macos", "linux"]
 [[build]]
 command = ["npm", "ci"]
 
+[[startup]]
+command = ["node", "index.js", "daemon"]
+
 [[actions]]
 id = "toggle"
 title = "Toggle Quickpad"

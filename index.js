@@ -1,6 +1,7 @@
 "use strict";
 
 const { toggleFromAction } = require("./lib/api");
+const { ensureTerminalDaemon, runTerminalDaemon } = require("./lib/terminal-daemon");
 const { startUi } = require("./lib/ui");
 
 async function main() {
@@ -11,6 +12,14 @@ async function main() {
   }
   if (command === "ui") {
     startUi();
+    return;
+  }
+  if (command === "daemon") {
+    await ensureTerminalDaemon();
+    return;
+  }
+  if (command === "daemon-worker") {
+    await runTerminalDaemon();
     return;
   }
   throw new Error("usage: node index.js <toggle|ui>");
