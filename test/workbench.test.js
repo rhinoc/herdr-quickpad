@@ -7,6 +7,7 @@ const path = require("node:path");
 const test = require("node:test");
 
 const { InputDecoder, csiEvent } = require("../lib/input");
+const { renderMarkdownLine, safeText } = require("../lib/markdown");
 const { readNote, writeNote } = require("../lib/state");
 const { WorkbenchUi } = require("../lib/ui");
 
@@ -80,6 +81,18 @@ test("keeps ordinary note text and control keys", () => {
     { type: "enter" },
     { type: "backspace" },
   ]);
+});
+
+test("renders Markdown syntax inline while keeping the source editable", () => {
+  const checklist = safeText(renderMarkdownLine("- [ ] Ship **today**"));
+  assert.match(checklist, /☐ Ship today/);
+  assert.doesNotMatch(checklist, /\[ \]/);
+
+  const heading = safeText(renderMarkdownLine("## Quickpad"));
+  assert.equal(heading, "Quickpad");
+
+  const editing = safeText(renderMarkdownLine("- [ ] Ship **today**", { cursorColumn: 3 }));
+  assert.match(editing, /- \[ \]/);
 });
 
 test("decodes ctrl+t as the tab switching command", () => {
