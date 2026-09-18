@@ -29,9 +29,10 @@ Quickpad is a Herdr plugin for temporary work. It opens a focused popup with two
 
 ## Features
 
-- 📝 **Auto-saving Markdown notes** — Edit, split, and delete lines without a separate save action, with inline rendering for headings, emphasis, lists, and task checkboxes.
+- 📝 **Auto-saving Markdown notes** — Edit, split, and delete lines without a separate save action. Markdown renders inline like a lightweight Typora view, while syntax under the cursor remains temporarily visible for editing.
 - 🖥️ **Embedded terminal** — Start a shell in the current popup, rooted at your home directory; its session survives closing and reopening Quickpad.
 - 🔁 **Fast tab switching** — Click either tab or press `Ctrl+T` from either tab.
+- 📍 **Remembers your tab** — Quickpad reopens on the Notes or Terminal tab you used last.
 - 🧹 **Temporary by design** — `cmd+j` toggles the popup and `Esc` closes it.
 
 ## Requirements
@@ -69,13 +70,19 @@ herdr server reload-config
 
 Open Quickpad with `cmd+j`.
 
+Quickpad reopens on the tab that was active when you last closed it.
+
 ### Notes
 
 - Type normally; changes are saved automatically.
 - `Enter` inserts a new line.
 - Arrow keys move the cursor.
 - `Delete` and `Backspace` remove text or join adjacent lines.
-- Type Markdown directly; headings, emphasis, lists, code, and `- [ ]` task checkboxes render inline while the original Markdown is preserved.
+- `cmd+a` selects all, `cmd+c` copies, `cmd+x` cuts, and `cmd+v` pastes. With no selection, `cmd+c` copies the current line. `Ctrl+C` clears all note content.
+- `cmd+z` undoes and `cmd+shift+z` or `cmd+y` redoes. `Ctrl+U`, `Ctrl+K`, and `Ctrl+W` delete to the line start, line end, and previous word.
+- Hold `Shift` with the arrow, `Home`, or `End` keys to select a range.
+- Drag with the left mouse button to select text; the selection can then be copied or cut.
+- Type Markdown directly; headings, emphasis, lists, code, and task checkboxes such as `- [ ]` or `-[]` render inline. Syntax is revealed only while the cursor is inside the corresponding Markdown control sequence.
 - `Ctrl+T` switches to Terminal.
 
 ### Terminal
@@ -84,6 +91,7 @@ Open Quickpad with `cmd+j`.
 - Switching back and forth reuses the same shell session.
 - Closing and reopening Quickpad reconnects to the same shell, so long-running commands keep running.
 - `Ctrl+T` switches back to Notes.
+- Other control keys, including `Ctrl+U`, `Ctrl+K`, `Ctrl+C`, and `Ctrl+D`, are passed to the shell.
 - Shell input stays inside this popup; Quickpad does not open a separate Herdr tab.
 
 ### Keyboard shortcuts
